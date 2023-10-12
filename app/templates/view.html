@@ -1,31 +1,73 @@
 {% extends 'base.html' %}
-
-{% block content %}
-
-    <table class="table table-striped">
-    <tbody>
-        {% for q in query%}
-            <tr>
-                <th scope="row">{{ q.id }}</th>
-                <td>{{ q.name }}</td>
-                <td>{{ q.description }}</td>
-                <td>{{ q.date }}</td>
-                <td>
-                    {% if q.flag %} 
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked disabled>
-                        <label class="form-check-label" for="flexCheckCheckedDisabled"></label>
+    
+    {% block content %}
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10"></div>
+                <div class="col-sm-2">
+                    <br>
+                    <a href= {{ url_for('add_task') }} class="btn btn-outline-success">ДОБАВИТЬ ЗАДАНИЕ</a>
+                </div>
+            </div>
+        </div>
+        
+        <br>
+        
+        <div class="container">
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <div class="row">
+                    <div class="col-sm-10"></div>
+                    <div class="col-sm-2">
+                        <select name="status" id="status">
+                            {% for s in status %}
+                                <option name="status" id="status">{{ s }}</option>
+                            {% endfor %}  
+                        </select> <br>   
+    
+                        <p> {{ form.show }} </p>
                     </div>
-                    {% else %}
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled>
-                        <label class="form-check-label" for="flexCheckDisabled"></label>
-                    </div>
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor%}
-    </tbody>
-    </table>
+                </div>
+            </form>
+        </div>
+        
+        <div class="container">
+            <table class="table table-striped">
+            <thead>
+                <tr>
+                <th scope="col">Номер задачи</th>
+                <th scope="col">Название задачи</th>
+                <th scope="col">Описание задачи</th>
+                <th scope="col">Дата создания</th>
+                <th scope="col">Статус</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for q in query%}
+                    <tr>
+                        <th scope="row">{{ q.id }}</th>
+                        
+                        <td><a href="{{ url_for('view_task', number_task=q.id ) }}" >{{q.name}}</td>
+                        <td>{{ q.description }}</td>
+                        <td>{{ q.date }}</td>
+                        <td>
+                            {% if q.flag %} 
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked disabled>
+                                <label class="form-check-label" for="flexCheckCheckedDisabled"></label>
+                            </div>
+                            {% else %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled>
+                                <label class="form-check-label" for="flexCheckDisabled"></label>
+                            </div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor%}
+            </tbody>
+            </table>
+        </div>
+    {% endblock%}  
 
-{% endblock%}

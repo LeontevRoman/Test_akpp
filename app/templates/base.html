@@ -7,9 +7,36 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
-    
-{% block content%} {% endblock%}
 
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li style="color:green">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    
+    {% if not current_user.is_authenticated %}
+        <div class="container">
+            <div class="row">
+                <h3>Hi, please <a href={{url_for("login")}}>log in</a> or <a href={{url_for("reg")}}>register</a></h3><br>
+            </div>
+        </div>
+    {% else %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10">
+                    <h3>Hi, {{ current_user.login }}. Your last login: {{ current_user.last_login.strftime('%Y-%m-%d') }}</h3>
+                    <a href="logout" class="btn btn-outline-danger" role="button" aria-pressed="true">Logout</a>
+                </div>
+                <div class="col-sm-2"><br></div>                
+            </div>
+        </div>
+        
+        {% block content%} {% endblock%}
+    {% endif %}
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

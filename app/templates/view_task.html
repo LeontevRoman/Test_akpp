@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10"></div>
+        <div class="col-sm-2">
+            <br>
+            <a href= {{ url_for('view') }} class="btn btn-outline-secondary">Назад</a>
+        </div>
+        <div class="col-sm-2">
+            <br>
+            <a href= {{ url_for('edit_task', number_task=task.id) }} class="btn btn-outline-secondary">Редактировать</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <h1>{{ task.name }}</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+
+        <p> Номер задачи <input type="text" id="id" name="id" value={{task.id}} class="field left" readonly><br> </p>
+        <p> Название задачи <input type="text" id="name" name="name" value={{task.name}} class="field left" readonly><br> </p>
+        <p> Описание задачи <input type="text" id="description "name="description" value={{task.description}} class="field left" readonly><br> </p>
+        <p> Дата создания <input type="text" id="data" name.data value={{task.date}} class="field left" readonly>   <br> </p>
+        <p> Статус задачи 
+        
+        {% if task.flag %}
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked disabled>
+            <label class="form-check-label" for="flexCheckCheckedDisabled"></label>
+        {% else %}
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled>
+            <label class="form-check-label" for="flexCheckDisabled"></label>
+        {% endif %}<br> </p>
+        
+    </form>
+    <nav aria-label="Navigation">
+        <ul class="pagination">
+        {% if task.id <= 1%}
+            <li class="page-item"><a class="page-link" href="" style="pointer-events: none; color: #999;">Prew</a></li>
+        {% else %}
+            <li class="page-item"><a class="page-link" href="{{ url_for('view_task', number_task=task.id-1) }}">Prew</a></li>
+        {% endif%}
+            <li class="page-item"><a class="page-link" href="">{{task.id}}</a></li>
+        {% if task.id >= count_tasks%}
+            <li class="page-item"><a class="page-link" href="" style="pointer-events: none; color: #999;">Prew</a></li>
+        {% else %}
+            <li class="page-item"><a class="page-link" href="{{ url_for('view_task', number_task=task.id+1) }}">Next</a></li>
+        {% endif%}
+        </ul>
+    </nav>
+</div>	
+    
+{% endblock%}
