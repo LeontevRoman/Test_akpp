@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <table class="table table-striped">
+    <tbody>
+        {% for q in query%}
+            <tr>
+                <th scope="row">{{ q.id }}</th>
+                <td>{{ q.name }}</td>
+                <td>{{ q.description }}</td>
+                <td>{{ q.date }}</td>
+                <td>
+                    {% if q.flag %} 
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked disabled>
+                        <label class="form-check-label" for="flexCheckCheckedDisabled"></label>
+                    </div>
+                    {% else %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled>
+                        <label class="form-check-label" for="flexCheckDisabled"></label>
+                    </div>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor%}
+    </tbody>
+    </table>
+
+{% endblock%}
