@@ -1,14 +1,6 @@
 /.env
 /app/db.db3
 /env/
-__pycache__/config.cpython-311.pyc
-app/__pycache__/__init__.cpython-311.pyc
-app/__pycache__/forms.cpython-311.pyc
-app/__pycache__/models.cpython-311.pyc
-app/__pycache__/routes.cpython-311.pyc
-app/__pycache__/views.cpython-311.pyc
-.idea/misc.xml
-.idea/modules.xml
-.idea/test_akpp.iml
-.idea/vcs.xml
-.idea/inspectionProfiles/profiles_settings.xml
+/__pycache__/
+/.idea/
+app/__pycache__/
