@@ -2,5 +2,5 @@
 /app/db.db3
 /env/
 /__pycache__/
-/.idea/
+.idea/
 app/__pycache__/
